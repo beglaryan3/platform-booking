@@ -1,0 +1,10 @@
+rootProject.name = 'platform-booking'
+
+include ':booking-service-implementation'
+project(":booking-service-implementation").projectDir = file("components/services/implementation")
+
+include ':booking-service-interface'
+project(":booking-service-interface").projectDir = file("components/services/interface")
+
+include ':exceptions'
+project(":exceptions").projectDir = file("components/common/exceptions")

@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'io.freefair.lombok' version "${freeFairLombokVersion}"
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+    id 'org.springdoc.openapi-gradle-plugin' version "1.6.0"
+    id 'org.hidetake.swagger.generator' version "2.19.2"
+}
+
+group = 'com.booking.platform'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(":booking-service-interface")
+    implementation project(":exceptions")
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:3.5.9"
+
+    implementation("org.postgresql:postgresql:$postgresVersion")
+
+    // flyway
+    implementation("org.flywaydb:flyway-core:$flywayVersion")
+    implementation "org.apache.commons:commons-lang3:$commonsLangVersion"
+
+
+    //OpenApi
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$openapiVersion")
+    swaggerCodegen('io.swagger.codegen.v3:swagger-codegen-cli:3.0.34')
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
