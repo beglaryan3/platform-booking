@@ -1,0 +1,33 @@
+server:
+  port: 8090
+
+platform:
+  booking:
+    version: /v1
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOSTNAME:localhost}:${DB_PORT:5432}/platform
+    driver-class-name: org.postgresql.Driver
+    password: java
+    username: postgres
+
+  flyway:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    schemas: booking
+
+  mail:
+    username: bookingsystembook@yandex.ru
+    password: ygkeidtowvhhmgbo
+    port: 465
+    host: smtp.yandex.ru
+    protocol: smtps
+
+springdoc:
+  api-docs:
+    path: /api/v1/book/openapi/api-docs
+  swagger-ui:
+    path: /api/v1/book/openapi/swagger-ui.html
+    url: /api/v1/book/openapi/api-docs

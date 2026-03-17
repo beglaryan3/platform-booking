@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "com.avast.gradle.docker-compose" version("${avastDockerComposPluginVersion}")
 }
 
 group = 'org.example'
@@ -10,7 +11,25 @@ repositories {
 }
 
 dependencies {
+
 }
+
+task buildDockerImage(type: Exec) {
+    mustRunAfter assemble
+    workingDir "${projectDir}"
+    commandLine "docker", "build", "--build-arg", "FOUNDATION_BUILD_TAG=dev", "-f", "Dockerfile", "-t", "platform/booking", "--pull=false", "."
+}
+
+task buildPostgresDockerImage(type: Exec) {
+    workingDir "${projectDir}/docker/postgres"
+    commandLine "docker", "build", "-t", "platform/postgres", "--pull", "."
+}
+
+dockerCompose {
+    projectName = 'booking-service'
+    useComposeFiles = ['docker/docker-compose.yml']
+}
+
 
 test {
     useJUnitPlatform()

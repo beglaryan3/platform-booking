@@ -11,7 +11,9 @@ version = '1.0'
 repositories {
     mavenCentral()
 }
-
+bootJar {
+    enabled = false
+}
 dependencies {
     implementation project(":exceptions")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$openapiVersion")

@@ -1,0 +1,89 @@
+version: "3.9"
+services:
+  db:
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
+    image: platform/postgres
+    container_name: "db_postgres"
+    hostname: db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: java
+      POSTGRES_DB: platform
+    ports:
+      - "127.0.0.1:5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d platform"]
+      start_period: 5s
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  booking-service:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    image: platform/booking
+    container_name: "booking-service"
+    hostname: booking
+    environment:
+      DB_HOSTNAME: db
+      DB_USER: postgres
+      DB_PASSWORD: java
+      DB_NAME: platform
+    ports:
+      - "127.0.0.1:8090:8090"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: "pgadmin"
+    depends_on:
+      - db
+    ports:
+      - "127.0.0.1:5555:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+    restart: unless-stopped
+volumes:
+    postgresql:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
