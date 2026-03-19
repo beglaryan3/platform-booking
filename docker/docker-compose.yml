@@ -8,9 +8,7 @@ services:
     container_name: "db_postgres"
     hostname: db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: java
-      POSTGRES_DB: platform
+      - POSTGRES_PASSWORD=java
     ports:
       - "127.0.0.1:5433:5432"
     healthcheck:
@@ -28,10 +26,7 @@ services:
     container_name: "booking-service"
     hostname: booking
     environment:
-      DB_HOSTNAME: db
-      DB_USER: postgres
-      DB_PASSWORD: java
-      DB_NAME: platform
+      - DB_HOSTNAME=db
     ports:
       - "127.0.0.1:8090:8090"
     depends_on:

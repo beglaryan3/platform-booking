@@ -7,7 +7,7 @@ platform:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOSTNAME:localhost}:${DB_PORT:5432}/platform
+    url: jdbc:postgresql://${DB_HOSTNAME:localhost}:5432/platform
     driver-class-name: org.postgresql.Driver
     password: java
     username: postgres
