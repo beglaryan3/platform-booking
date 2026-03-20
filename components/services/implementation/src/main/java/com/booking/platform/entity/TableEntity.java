@@ -52,7 +52,7 @@ public class TableEntity {
     @JoinColumn(name = "company_id")
     private CompanyEntity company;
 
-    TableResponse toTableResponse(){
+   public TableResponse toTableResponse(){
         return new TableResponse(tableId,tableNumber,seatSCount,tableType,isFree,bookingDate,departureDate,company.toResponse());
     }
 

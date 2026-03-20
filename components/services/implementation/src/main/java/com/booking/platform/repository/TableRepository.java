@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface TableRepository extends JpaRepository<TableEntity, UUID> {
 
+    TableEntity findByTableNumber(String tableNumber);
+
 }

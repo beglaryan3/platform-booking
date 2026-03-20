@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class CreateTableRequest extends AbstractTableRequest {
 }

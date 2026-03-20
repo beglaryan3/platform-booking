@@ -8,10 +8,10 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.List;
 
 @Log4j2
 @RestController
@@ -25,8 +25,14 @@ public class TableController {
     private TableService tableService;
 
 
+
+    @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public TableResponse createTable(@RequestBody CreateTableRequest request){
-        return  null;
+    public List<TableResponse> createTable(@RequestBody CreateTableRequest request, Principal principal) {
+        String email = principal.getName();
+        log.info("Received request to create table");
+        List<TableResponse> tables = tableService.createTable(request, email);
+        log.info("Table created");
+        return tables;
     }
 }
